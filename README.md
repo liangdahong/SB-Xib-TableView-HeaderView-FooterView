@@ -21,6 +21,29 @@
 <img src="ok.gif" width="80%">
 </p>
 
+## 怎么样自适应高度
+可以添加如下代码完成自适应，参考于[这里](http://jerrytian.com/2016/03/05/%E5%9C%A8Storyboard%E4%B8%AD%E4%B8%BAUITableView%E6%B7%BB%E5%8A%A0Header%E5%92%8CFooter/)
+
+```	c
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    {
+        CGFloat height = [self.tableView.tableFooterView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+        CGRect footerFrame = self.tableView.tableFooterView.frame;
+        footerFrame.size.height = height;
+        self.tableView.tableFooterView.frame = footerFrame;
+        self.tableView.tableFooterView = self.tableView.tableFooterView;
+    }
+    {
+        CGFloat height = [self.tableView.tableHeaderView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+        CGRect headerFrame = self.tableView.tableHeaderView.frame;
+        headerFrame.size.height = height;
+        self.tableView.tableHeaderView.frame = headerFrame;
+        self.tableView.tableHeaderView = self.tableView.tableHeaderView;
+    }
+}
+```
+
 ## 参考
 - [在Storyboard中为UITableView添加Header和Footer](http://jerrytian.com/2016/03/05/%E5%9C%A8Storyboard%E4%B8%AD%E4%B8%BAUITableView%E6%B7%BB%E5%8A%A0Header%E5%92%8CFooter/)
 - [关于SB中的TableView和XIB中的TableView](http://www.jianshu.com/p/07f7a7ae236c)
